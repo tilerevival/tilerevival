@@ -3,20 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tile Revival — Professional Tile Repair | Nevada City · Grass Valley · Yuba City</title>
+<title>Tile Revival — Professional Tile Repair</title>
 <style>
+/* CSS GENERAL */
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: Georgia, serif; color: #1a1a1a; background: #faf8f5; overflow-x: hidden; }
-
-.wa-link {
-  display: inline-flex; align-items: center; gap: 10px;
-  background: #25D366; color: #fff;
-  padding: 16px 36px; font-size: 16px; font-weight: 700;
-  letter-spacing: 1px; border-radius: 4px;
-  text-transform: uppercase; text-decoration: none;
-  transition: opacity 0.2s;
-}
-.wa-link:hover { opacity: 0.88; }
+body { font-family: Georgia, serif; color: #1a1a1a; background: #faf8f5; line-height: 1.6; }
 
 /* NAV */
 nav {
@@ -24,68 +15,173 @@ nav {
   border-bottom: 1px solid #e8e0d0;
   padding: 16px 24px;
   display: flex; justify-content: space-between; align-items: center;
-  position: sticky; top: 0; z-index: 100;
+  position: sticky; top: 0; z-index: 1000;
 }
-.nav-links { display: flex; gap: 20px; align-items: center; flex-wrap: wrap; }
+.nav-links { display: flex; gap: 20px; align-items: center; }
 .nav-links a { text-decoration: none; color: #555; text-transform: uppercase; font-size: 12px; letter-spacing: 1px; }
-.nav-wa { background: #25D366; color: #fff; padding: 10px 18px; text-decoration: none; font-weight: 700; border-radius: 4px; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; }
+.nav-wa { background: #25D366; color: #fff; padding: 10px 18px; font-weight: 700; border-radius: 4px; }
 
 /* HERO */
-.hero { background: #f5f2ec; background-image: url('marble.webp'); background-size: cover; background-position: center; position: relative; padding: 120px 24px; text-align: center; }
-.hero-overlay { position: absolute; inset: 0; background: rgba(255,255,255,0.74); }
-.hero-content { position: relative; max-width: 800px; margin: 0 auto; }
-.hero h1 { font-size: 48px; font-weight: 400; line-height: 1.2; letter-spacing: 2px; margin-bottom: 20px; color: #1a1a1a; }
+.hero { background: #f5f2ec; position: relative; padding: 80px 24px; text-align: center; }
+.hero-content { position: relative; max-width: 800px; margin: 0 auto; z-index: 2; }
+.hero h1 { font-size: 42px; margin-bottom: 20px; letter-spacing: 2px; }
 .hero h1 span { color: #C9A84C; }
-.badge-row { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; margin-bottom: 36px; }
-.badge { background: #1a1a1a; color: #C9A84C; padding: 8px 20px; border-radius: 3px; font-size: 14px; letter-spacing: 1px; text-transform: uppercase; }
-
-/* STATS */
-.stats-bar { background: #C9A84C; padding: 32px 24px; }
-.stats-grid { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: repeat(3,1fr); text-align: center; gap: 24px; }
-.stat-num { font-size: 38px; font-weight: 700; color: #1a1a1a; }
-.stat-label { font-size: 12px; color: #5a3e00; letter-spacing: 2px; text-transform: uppercase; margin-top: 4px; }
-.stat-divider { border-left: 1px solid rgba(0,0,0,0.2); border-right: 1px solid rgba(0,0,0,0.2); }
-
-/* --- CAROUSEL FIXED SECTION --- */
-.carousel-section { 
-  position: relative; 
-  width: 100%; 
-  max-width: 900px; 
-  margin: 40px auto; 
-  overflow: hidden; 
-  background: #000;
-  border-radius: 8px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+.wa-link {
+  display: inline-flex; background: #25D366; color: #fff;
+  padding: 16px 36px; font-weight: 700; border-radius: 4px;
+  text-decoration: none; text-transform: uppercase; margin-top: 20px;
 }
-.carousel-track { 
-  display: flex; 
-  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); 
+
+/* CAROUSEL FIXED */
+.carousel-container {
+  max-width: 900px;
+  margin: 40px auto;
+  position: relative;
+  overflow: hidden;
+  background: #1a1a1a;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+.carousel-track {
+  display: flex;
+  transition: transform 0.6s ease-in-out;
+}
+.carousel-track img {
   width: 100%;
-}
-.carousel-track img { 
-  flex: 0 0 100%; 
-  width: 100%; 
-  height: 400px; /* גובה נוח לצפייה */
-  object-fit: contain; /* לא חותך את התמונה (מצוין לאנשים) */
-  background-color: #1a1a1a; 
+  flex: 0 0 100%;
+  height: 400px; /* גובה הקרוסלה */
+  object-fit: contain; /* שומר על התמונה שלמה ללא חיתוך */
+  background: #1a1a1a;
 }
 
-/* CAROUSEL BUTTONS */
+/* CAROUSEL CONTROLS */
 .carousel-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(201, 168, 76, 0.8);
-  color: #1a1a1a;
-  border: none;
-  width: 40px;
-  height: 40px;
-  cursor: pointer;
-  border-radius: 50%;
-  font-size: 18px;
-  font-weight: bold;
-  z-index: 15;
-  transition: all 0.2s;
+  position: absolute; top: 50%; transform: translateY(-50%);
+  background: rgba(201, 168, 76, 0.9); color: white;
+  border: none; width: 45px; height: 45px; border-radius: 50%;
+  cursor: pointer; z-index: 10; font-size: 20px;
 }
-.carousel-btn:hover { background: #C9A84C; color: #fff; }
-.carousel
+.carousel-btn.prev { left: 15px; }
+.carousel-btn.next { right: 15px; }
+
+.carousel-dots {
+  position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%);
+  display: flex; gap: 8px;
+}
+.dot {
+  width: 10px; height: 10px; background: rgba(255,255,255,0.4);
+  border-radius: 50%; cursor: pointer; border: none;
+}
+.dot.active { background: #C9A84C; transform: scale(1.2); }
+
+/* SECTIONS */
+section { padding: 60px 24px; max-width: 1000px; margin: 0 auto; text-align: center; }
+.section-title { font-size: 32px; margin-bottom: 40px; text-transform: uppercase; letter-spacing: 2px; }
+.services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+.service-card { background: white; padding: 30px; border: 1px solid #e8e0d0; border-radius: 8px; }
+
+/* FOOTER */
+footer { background: #1a1a1a; color: #888; padding: 40px; text-align: center; }
+
+@media (max-width: 600px) {
+  .hero h1 { font-size: 28px; }
+  .carousel-track img { height: 250px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div style="font-weight: bold; color: #C9A84C;">TILE REVIVAL</div>
+  <div class="nav-links">
+    <a href="#services">Services</a>
+    <a href="https://wa.me/19798140714" class="nav-wa">WhatsApp</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-content">
+    <h1>Cracked Tile?<br><span>Restored in 60 Minutes</span></h1>
+    <p>Professional epoxy repair. No dust, no mess.</p>
+    <a href="https://wa.me/19798140714" class="wa-link">Get Free Estimate</a>
+  </div>
+</div>
+
+<div class="carousel-container">
+  <button class="carousel-btn prev" id="prevBtn">&#10094;</button>
+  <button class="carousel-btn next" id="nextBtn">&#10095;</button>
+  
+  <div class="carousel-track" id="track">
+    <img src="slide1.jpg.png" alt="Repair 1">
+    <img src="slide2.jpg.png" alt="Repair 2">
+    <img src="slide3.jpg.png" alt="Repair 3">
+    <img src="slide4.jpg.png" alt="Repair 4">
+    <img src="slide5.jpg.png" alt="Repair 5">
+    <img src="slide6.jpg.png" alt="Repair 6">
+    <img src="slide7.jpg.png" alt="Repair 7">
+  </div>
+
+  <div class="carousel-dots" id="dotsContainer"></div>
+</div>
+
+<section id="services">
+  <h2 class="section-title">What We Fix</h2>
+  <div class="services-grid">
+    <div class="service-card"><h3>Floor Tiles</h3><p>Cracks and chips in any room.</p></div>
+    <div class="service-card"><h3>Bathroom</h3><p>Showers, tubs, and floors.</p></div>
+    <div class="service-card"><h3>Marble</h3><p>Countertops and stone.</p></div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Tile Revival · Nevada City · Grass Valley · Yuba City</p>
+</footer>
+
+<script>
+  const track = document.getElementById('track');
+  const slides = Array.from(track.children);
+  const nextBtn = document.getElementById('nextBtn');
+  const prevBtn = document.getElementById('prevBtn');
+  const dotsContainer = document.getElementById('dotsContainer');
+  
+  let index = 0;
+
+  // Create dots
+  slides.forEach((_, i) => {
+    const dot = document.createElement('button');
+    dot.classList.add('dot');
+    if (i === 0) dot.classList.add('active');
+    dot.addEventListener('click', () => {
+      index = i;
+      update();
+    });
+    dotsContainer.appendChild(dot);
+  });
+
+  const dots = Array.from(dotsContainer.children);
+
+  function update() {
+    track.style.transform = `translateX(-${index * 100}%)`;
+    dots.forEach(d => d.classList.remove('active'));
+    dots[index].classList.add('active');
+  }
+
+  nextBtn.addEventListener('click', () => {
+    index = (index + 1) % slides.length;
+    update();
+  });
+
+  prevBtn.addEventListener('click', () => {
+    index = (index - 1 + slides.length) % slides.length;
+    update();
+  });
+
+  // Auto slide
+  setInterval(() => {
+    index = (index + 1) % slides.length;
+    update();
+  }, 5000);
+</script>
+
+</body>
+</html>
