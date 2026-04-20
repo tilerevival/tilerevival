@@ -50,12 +50,12 @@ nav {
 .carousel-section { 
   position: relative; 
   width: 100%; 
-  max-width: 800px; /* הקטנת הרוחב המקסימלי */
+  max-width: 900px; 
   margin: 40px auto; 
   overflow: hidden; 
   background: #000;
   border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 .carousel-track { 
   display: flex; 
@@ -63,11 +63,11 @@ nav {
   width: 100%;
 }
 .carousel-track img { 
-  flex: 0 0 100%; /* מבטיח שכל תמונה תתפוס בדיוק 100% מהרוחב */
+  flex: 0 0 100%; 
   width: 100%; 
-  height: 350px; /* הקטנת הגובה למחשב */
-  object-fit: contain; /* שומר על התמונה מלאה בלי להיחתך */
-  background-color: #000; /* רקע שחור לתמונות שלא ממלאות את כל הגובה */
+  height: 400px; /* גובה נוח לצפייה */
+  object-fit: contain; /* לא חותך את התמונה (מצוין לאנשים) */
+  background-color: #1a1a1a; 
 }
 
 /* CAROUSEL BUTTONS */
@@ -75,141 +75,17 @@ nav {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(0,0,0,0.5);
-  color: white;
+  background: rgba(201, 168, 76, 0.8);
+  color: #1a1a1a;
   border: none;
-  padding: 12px;
+  width: 40px;
+  height: 40px;
   cursor: pointer;
   border-radius: 50%;
-  font-size: 20px;
+  font-size: 18px;
+  font-weight: bold;
   z-index: 15;
-  transition: background 0.2s;
+  transition: all 0.2s;
 }
-.carousel-btn:hover {
-  background: rgba(0,0,0,0.8);
-}
-.carousel-btn.prev {
-  left: 15px;
-}
-.carousel-btn.next {
-  right: 15px;
-}
-
-.carousel-dots { 
-  position: absolute; 
-  bottom: 15px; 
-  left: 50%; 
-  transform: translateX(-50%); 
-  display: flex; 
-  gap: 8px; 
-  z-index: 10;
-}
-.carousel-dot { 
-  width: 10px; 
-  height: 10px; 
-  border-radius: 50%; 
-  background: rgba(255,255,255,0.4); 
-  cursor: pointer; 
-  border: none; 
-  padding: 0;
-  transition: background 0.3s, transform 0.2s; 
-}
-.carousel-dot.active { 
-  background: #C9A84C; 
-  transform: scale(1.3);
-}
-
-/* RESPONSIVE */
-@media (max-width: 600px) {
-  .carousel-track img { 
-    height: 250px; /* גובה מותאם לנייד */
-  }
-  .carousel-btn {
-    padding: 8px;
-    font-size: 16px;
-  }
-}
-</style>
-</head>
-<body>
-
-<div class="carousel-section">
-  <button class="carousel-btn prev" id="prevBtn">&#10094;</button>
-  <button class="carousel-btn next" id="nextBtn">&#10095;</button>
-  <div class="carousel-track" id="carouselTrack">
-    <img src="slide1.jpg.png" alt="Tile Repair 1">
-    <img src="slide2.jpg.png" alt="Tile Repair 2">
-    <img src="slide3.jpg.png" alt="Tile Repair 3">
-    <img src="slide4.jpg.png" alt="Tile Repair 4">
-    <img src="slide5.jpg.png" alt="Tile Repair 5">
-    <img src="slide6.jpg.png" alt="Tile Repair 6">
-    <img src="slide7.jpg.png" alt="Tile Repair 7">
-  </div>
-  <div class="carousel-dots" id="carouselDots"></div>
-</div>
-
-<script>
-(function(){
-  const track = document.getElementById('carouselTrack');
-  const dotsContainer = document.getElementById('carouselDots');
-  const nextBtn = document.getElementById('nextBtn');
-  const prevBtn = document.getElementById('prevBtn');
-  const slides = track.getElementsByTagName('img');
-  const total = slides.length;
-  let current = 0, timer;
-
-  // Generate Dots
-  for(let i = 0; i < total; i++){
-    const d = document.createElement('button');
-    d.className = 'carousel-dot' + (i===0?' active':'');
-    d.addEventListener('click', () => {
-      current = i;
-      updateCarousel();
-      resetTimer();
-    });
-    dotsContainer.appendChild(d);
-  }
-
-  // Update Carousel Position and Dots
-  function updateCarousel(){
-    track.style.transform = `translateX(-${current * 100}%)`;
-    const dots = document.querySelectorAll('.carousel-dot');
-    dots.forEach((d, i) => d.classList.toggle('active', i === current));
-  }
-
-  // Manual Navigation Functions
-  function nextSlide(){
-    current = (current + 1) % total;
-    updateCarousel();
-    resetTimer();
-  }
-
-  function prevSlide(){
-    current = (current - 1 + total) % total;
-    updateCarousel();
-    resetTimer();
-  }
-
-  // Event Listeners for buttons
-  nextBtn.addEventListener('click', nextSlide);
-  prevBtn.addEventListener('click', prevSlide);
-
-  // Auto Scroll
-  function startTimer(){
-    timer = setInterval(() => {
-      current = (current + 1) % total;
-      updateCarousel();
-    }, 4000);
-  }
-
-  function resetTimer(){
-    clearInterval(timer);
-    startTimer();
-  }
-
-  startTimer();
-})();
-</script>
-
-</body>
-</html>
+.carousel-btn:hover { background: #C9A84C; color: #fff; }
+.carousel
