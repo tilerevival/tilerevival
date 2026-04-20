@@ -146,8 +146,39 @@ footer { background: #1a1a1a; color: #666; padding: 40px 24px; text-align: cente
   </div>
 </div>
 
+<!-- CAROUSEL -->
+<div class="carousel-section">
+  <div class="carousel-track" id="carouselTrack">
+    <img src="slide1.jpg.png" alt="Tile Repair">
+    <img src="slide2.jpg.png" alt="Tile Repair">
+    <img src="slide3.jpg.png" alt="Tile Repair">
+    <img src="slide4.jpg.png" alt="Tile Repair">
+    <img src="slide5.jpg.png" alt="Tile Repair">
+    <img src="slide6.jpg.png" alt="Tile Repair">
+    <img src="slide7.jpg.png" alt="Tile Repair">
+  </div>
+  <div class="carousel-dots" id="carouselDots"></div>
+</div>
+<script>
+(function(){
+  const track = document.getElementById('carouselTrack');
+  const dotsContainer = document.getElementById('carouselDots');
+  const total = 7;
+  let current = 0, timer;
+  for(let i = 0; i < total; i++){
+    const d = document.createElement('button');
+    d.className = 'carousel-dot' + (i===0?' active':'');
+    d.onclick = () => { goTo(i); clearInterval(timer); startTimer(); };
+    dotsContainer.appendChild(d);
+  }
+  function goTo(n){ current=n; track.style.transform=`translateX(-${n*100}%)`; document.querySelectorAll('.carousel-dot').forEach((d,i)=>d.classList.toggle('active',i===n)); }
+  function startTimer(){ timer=setInterval(()=>goTo((current+1)%total),4000); }
+  startTimer();
+})();
+</script>
+
 <!-- SERVICES -->
-<section id="services" style="background:#faf8f5;">
+  <section id="services" style="background:#faf8f5;">
   <div class="container">
     <p class="section-label">What We Fix</p>
     <h2 class="section-title">Our Services</h2>
